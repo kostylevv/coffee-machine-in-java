@@ -7,35 +7,40 @@ public class Main {
     public static void main(String[] args) {
       boolean cont = true;
       VendingMachine m = new VendingMachine();
-      System.out.println(m.getState());
+      System.out.println("Hello");
       String line;
       Scanner scanner = new Scanner(System.in);
 
       while (cont) {
-        System.out.print("Write action (buy, fill, take, exit):");
+        System.out.print("Write action (buy, fill, take, exit, remaining):");
           try {
             line = scanner.nextLine().trim();
               switch (line) {
               case "buy":
-                  System.out.print("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:");
+                  System.out.print("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, back - return to main menu:");
                   line = scanner.nextLine().trim();
                   switch (line) {
                     case "1":
                       m.order(Drink.ESPRESSO);
+                      System.out.println("Espresso is ready.");
                       break;
 
                     case "2":
                       m.order(Drink.LATTE);
+                      System.out.println("Latte is ready.");
                       break;
 
                     case "3":
                       m.order(Drink.CAPPUCHINO);
+                      System.out.println("Cappuchino is ready.");
+                      break;
+
+                    case "back":
                       break;
 
                     default:
                       System.out.println("Unsupported drink");
                   }
-                System.out.print(m.getState());
                 System.out.println();
                 break;
 
@@ -49,16 +54,16 @@ public class Main {
                   System.out.println("Write how many disposable cups do you want to add:");
                   int cups = Integer.parseInt(scanner.nextLine());
                   m.refill(Refill.getInstance(water,milk,beans,cups));
-                  System.out.print(m.getState());
-                  System.out.println();
                   break;
 
               case "take":
                   int cash = m.take();
                   System.out.println("I gave you $" + cash);
-                  System.out.print(m.getState());
-                  System.out.println();
                   break;
+
+              case "remaining":
+                System.out.println(m.getState());
+                break;
 
               case "exit":
                   cont = false;
