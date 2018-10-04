@@ -167,7 +167,7 @@ class VendingMachine implements Coffeeable, Payable {
         for (ResourceType resourceType : refill.getResources().keySet()) {
           int avail = (resources.get(resourceType) == null) ? 0 : resources.get(resourceType);
           int additional = refill.getResources().get(resourceType);
-          if (additional > 0) {
+          if (additional >= 0) {
               setResource(resourceType, avail+additional);
           } else {
             throw new IllegalArgumentException("Refill cannot be negative");
